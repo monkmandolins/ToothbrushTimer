@@ -79,6 +79,7 @@ void loop() {
   if (buttonState && is_counting) {      // this triggers if the button is pressed and there is currently a countdown running
     is_counting = false;                 // change state of variable is_counting to false
     current_number = 0;                  // stop the counter
+    playPause();
     }
 
   if (is_counting == true) {             // at this point in the code, if the variable is_counting has been changed to true by button being pressed when the counting routine is not already running
@@ -146,6 +147,12 @@ execute_CMD(0x06, 0, volume); // Set the volume (0x00~0x30)
 void playNext()
 {
   execute_CMD(0x01,0,1);
+}
+
+//Function to pause player
+void playPause()
+{
+  execute_CMD(0x0E,0,1);
 }
 
 //Part of the library for command execution for the MP3 player
