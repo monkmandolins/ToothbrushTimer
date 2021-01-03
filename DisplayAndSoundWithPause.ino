@@ -74,12 +74,13 @@ void loop() {
     playNext();                         // play the songe
   }
   
-  // stops the counter  I DON'T THINK THIS IS WORKING
+  // stops the counter, resets the device
   buttonState = digitalRead(buttonPin);  // check if the pushbutton is pressed
   if (buttonState && is_counting) {      // this triggers if the button is pressed and there is currently a countdown running
     is_counting = false;                 // change state of variable is_counting to false
     current_number = 0;                  // stop the counter
     playPause();
+    resetFunc();
     }
 
   if (is_counting == true) {             // at this point in the code, if the variable is_counting has been changed to true by button being pressed when the counting routine is not already running
@@ -97,7 +98,7 @@ void loop() {
  // need to catch the end.  Without this, the counter just continues to go below zero
   if (current_number == 0) {            // at the point where current number is zero
     is_counting = false;                // turn off the counter
-     resetFunc();
+    resetFunc();
     }  
   }  
 }
