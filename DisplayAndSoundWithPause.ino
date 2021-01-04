@@ -98,6 +98,7 @@ void loop() {
  // need to catch the end.  Without this, the counter just continues to go below zero
   if (current_number == 0) {            // at the point where current number is zero
     is_counting = false;                // turn off the counter
+    playPause();
     resetFunc();
     }  
   }  
