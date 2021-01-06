@@ -1,0 +1,51 @@
+//Meaning to toggle between two states with one button
+
+const int buttonPin = 2;
+const int ledPin = 4;
+int ledState = LOW;
+int buttonState;
+int lastButtonState = HIGH;
+unsigned long lastDebounceTime = 0;
+unsigned long debounceDelay = 50;
+bool is_reading = false;
+
+void setup() {
+  pinMode(buttonPin, INPUT_PULLUP);
+  pinMode(ledPin, OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  int reading = digitalRead(buttonPin);
+  if (reading != lastButtonState) {
+    lastDebounceTime = millis();
+  }
+
+  if ((millis() - lastDebounceTime) > debounceDelay) {
+    if (reading != buttonState) {
+      buttonState = reading;
+   
+
+      if (buttonState == HIGH) {
+        is_reading == !is_reading;
+        if (is_reading == false) {
+          Serial.println("Get it going");
+          digitalWrite(ledPin, HIGH);
+          is_reading == true;
+        }
+        if (is_reading == true) {
+          Serial.println("Stop It");
+          digitalWrite(ledPin, LOW);
+          is_reading == false;
+        }
+        
+      }
+      else {
+        digitalWrite(ledPin, LOW);
+
+      }
+    }
+  }
+
+  lastButtonState = reading;
+}
